@@ -323,6 +323,7 @@ pub fn read_permissions() -> Result<HashMap<String, Vec<PermissionFile>>, Error>
       })
     {
       let permissions_path = PathBuf::from(value);
+      println!("checking permissions path {}: {}", key, permissions_path.display());
       let permissions_str = std::fs::read_to_string(&permissions_path).map_err(Error::ReadFile)?;
       let permissions: Vec<PathBuf> = serde_json::from_str(&permissions_str)?;
       let permissions = parse_permissions(permissions)?;
